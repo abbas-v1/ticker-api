@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 31, 2018 4:23:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.company.entity.Users" table="USERS" schema="APP" optimistic-lock="version">
+        <id name="userId" type="long">
+            <column name="USER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="FIRST_NAME" length="50" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LAST_NAME" length="50" />
+        </property>
+        <property name="registration" type="timestamp">
+            <column name="REGISTRATION" length="29" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 31, 2018 4:23:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.company.entity.Ticker" table="TICKER" schema="APP" optimistic-lock="version">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="channelId" type="long">
+            <column name="CHANNEL_ID" not-null="true" />
+        </property>
+        <property name="bid" type="int">
+            <column name="BID" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="bidSize" type="int">
+            <column name="BID_SIZE" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="ask" type="int">
+            <column name="ASK" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="askSize" type="int">
+            <column name="ASK_SIZE" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="dailyChange" type="int">
+            <column name="DAILY_CHANGE" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="dailyChangePerc" type="int">
+            <column name="DAILY_CHANGE_PERC" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="lastPrice" type="int">
+            <column name="LAST_PRICE" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="volume" type="int">
+            <column name="VOLUME" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="high" type="int">
+            <column name="HIGH" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="low" type="int">
+            <column name="LOW" precision="5" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
