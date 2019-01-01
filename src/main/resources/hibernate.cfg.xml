@@ -42,10 +42,12 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
-    <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/sample</property>
+    <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+    <property name="hibernate.connection.url">jdbc:derby:bitcoin;create=true</property>
     <property name="hibernate.connection.username">app</property>
     <property name="hibernate.connection.password">app</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.hbm2ddl.import_files">USER_table_inserts.sql</property>
     <mapping resource="com/company/entity/Users.hbm.xml"/>
     <mapping resource="com/company/entity/Ticker.hbm.xml"/>
   </session-factory>
