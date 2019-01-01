@@ -18,6 +18,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TickerDao {
 
+    public List getTickers() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List list = session.createQuery("from Ticker").setMaxResults(10).list();
+        session.close();
+        return list;
+    }
+
     public void saveTickerData(List<List<Integer>> tickerData) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
