@@ -28,7 +28,7 @@ public class TickerController {
     private static final Logger LOG = LogManager.getLogger(TickerController.class);
 
     @PostMapping("/ticker")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "https://angular-app-227305.appspot.com")
     public void postTickerData(@RequestBody List<List<Integer>> tickerList) {
         LOG.debug("Received data from ticker : " + tickerList.size() );
         tickerDao.saveTickerData(tickerList);
