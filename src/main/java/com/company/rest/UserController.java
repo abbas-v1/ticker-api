@@ -9,6 +9,8 @@ import com.company.db.UserDao;
 import com.company.dto.UserV1;
 import com.company.dto.UserV2;
 import com.company.entity.Users;
+import com.company.validation.CustomValidation;
+import com.company.validation.UserValidator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -17,6 +19,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +34,12 @@ public class UserController {
     @Autowired
     private UserDao userDao;
     private static final Logger LOG = LogManager.getLogger(UserController.class);
+
+    @PostMapping("/user")
+    @CustomValidation(UserValidator.class)
+    public void postUser(@RequestBody UserV1 user) {
+        LOG.debug("Received user data : " + user.getFirstName());
+    }
 
     @GetMapping("/v1/users")
     public List<UserV1> getUsersV1(@RequestParam("name") Optional<String> param) {
