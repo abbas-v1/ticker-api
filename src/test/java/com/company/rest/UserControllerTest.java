@@ -9,18 +9,15 @@ import com.company.dto.UserV1;
 import com.company.dto.UserV2;
 import java.util.List;
 import java.util.Optional;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  *
  * @author abbas
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserControllerTest {
 
@@ -29,16 +26,19 @@ public class UserControllerTest {
 
     @Test
     public void contexLoads() throws Exception {
-        assertNotNull("User Controller is not null", controller);
+        Assertions.assertThat(controller).isNotNull();
     }
 
     /**
      * Test of getUsersV1 method, of class UserController.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetUsersV1_withNullParam() {
         Optional<String> param = null;
-        controller.getUsersV1(param);
+        org.junit.jupiter.api.Assertions.assertThrows(
+                NullPointerException.class,
+                () -> controller.getUsersV1(param)
+        );
     }
 
     /**
@@ -48,8 +48,7 @@ public class UserControllerTest {
     public void testGetUsersV1() {
         Optional<String> param = Optional.empty();
         List<UserV1> result = controller.getUsersV1(param);
-        assertNotNull(result);
-        assertEquals(4, result.size());
+        Assertions.assertThat(result).isNotNull().hasSize(4);
     }
 
     /**
@@ -59,8 +58,7 @@ public class UserControllerTest {
     public void testGetUsersV1_ExistingName() {
         Optional<String> param = Optional.of("Abbas");
         List<UserV1> result = controller.getUsersV1(param);
-        assertNotNull(result);
-        assertEquals(1, result.size());
+        Assertions.assertThat(result).isNotNull().hasSize(1);
     }
 
     /**
@@ -70,17 +68,19 @@ public class UserControllerTest {
     public void testGetUsersV1_notExistingName() {
         Optional<String> param = Optional.of("NotAValidName");
         List<UserV1> result = controller.getUsersV1(param);
-        assertNotNull(result);
-        assertEquals(0, result.size());
+        Assertions.assertThat(result).isNotNull().hasSize(0);
     }
 
     /**
      * Test of getUsersV2 method, of class UserController.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetUsersV2_withNullParam() {
         Optional<String> param = null;
-        controller.getUsersV2(param);
+        org.junit.jupiter.api.Assertions.assertThrows(
+                NullPointerException.class,
+                () -> controller.getUsersV2(param)
+        );
     }
 
     /**
@@ -90,7 +90,7 @@ public class UserControllerTest {
     public void testGetUsersV2() {
         Optional<String> param = Optional.empty();
         List<UserV2> result = controller.getUsersV2(param);
-        assertNotNull(result);
+        Assertions.assertThat(result).isNotNull().hasSize(4);
     }
     
         /**
@@ -100,10 +100,12 @@ public class UserControllerTest {
     public void testGetUsersV2_withValue() {
         Optional<String> param = Optional.empty();
         List<UserV2> result = controller.getUsersV2(param);
-        assertNotNull(result.get(0).getFirstName());
-        assertNotNull(result.get(0).getLastName());
-        assertNotNull(result.get(0).getUserId());
-        assertNotNull(result.get(0).getRegistration());
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.get(0)).isNotNull();
+        Assertions.assertThat(result.get(0).getFirstName()).isNotNull();
+        Assertions.assertThat(result.get(0).getLastName()).isNotNull();
+        Assertions.assertThat(result.get(0).getUserId()).isNotNull();
+        Assertions.assertThat(result.get(0).getRegistration()).isNotNull();
     }
 
 }

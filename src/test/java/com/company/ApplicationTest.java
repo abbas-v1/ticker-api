@@ -5,10 +5,8 @@
  */
 package com.company;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -19,10 +17,13 @@ public class ApplicationTest {
     /**
      * Test of main method, of class Application.
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testMain() {
         String[] args = null;
-        Application.main(args);
+        org.junit.jupiter.api.Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> Application.main(args)
+        );
     }
     
 }
