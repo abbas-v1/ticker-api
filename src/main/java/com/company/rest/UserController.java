@@ -5,10 +5,10 @@
  */
 package com.company.rest;
 
-import com.company.db.UserDao;
 import com.company.dto.UserV1;
 import com.company.dto.UserV2;
 import com.company.entity.Users;
+import com.company.service.UserService;
 import com.company.validation.CustomValidation;
 import com.company.validation.UserValidator;
 import java.util.List;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
     private static final Logger LOG = LogManager.getLogger(UserController.class);
 
     @PostMapping("/user")
@@ -44,15 +44,19 @@ public class UserController {
     @GetMapping("/v1/users")
     public List<UserV1> getUsersV1(@RequestParam("name") Optional<String> param) {
         LOG.debug("getUsers v1 is called");
-        List<Users> users = userDao.getUsers(param);
+        List<Users> users = getUsers(param);
         return mapUsers(users, this::toUserV1);
     }
 
     @GetMapping("/v2/users")
     public List<UserV2> getUsersV2(@RequestParam("name") Optional<String> param) {
         LOG.debug("getUsers v2 is called");
-        List<Users> users = userDao.getUsers(param);
+        List<Users> users = getUsers(param);
         return mapUsers(users, this::toUserV2);
+    }
+
+    private List<Users> getUsers(Optional<String> param) {
+        return userService.getUsers(param);
     }
 
     private <T, S> List<S> mapUsers(List<T> users, Function<T, S> mapper) {

@@ -5,8 +5,9 @@
  */
 package com.company.rest;
 
-import com.company.db.TickerDao;
 import java.util.List;
+
+import com.company.service.TickerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +25,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class TickerController {
 
     @Autowired
-    private TickerDao tickerDao;
+    private TickerService tickerService;
     private static final Logger LOG = LogManager.getLogger(TickerController.class);
 
     @PostMapping("/ticker")
-    @CrossOrigin(origins = "https://angular-app-227305.appspot.com")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void postTickerData(@RequestBody List<List<Integer>> tickerList) {
         LOG.debug("Received data from ticker : " + tickerList.size() );
-        tickerDao.saveTickerData(tickerList);
+        tickerService.saveTickerData(tickerList);
     }
 
     @GetMapping("/ticker")
     public List getTickerData() {
         LOG.debug("getTickerData is called");
-        return tickerDao.getTickers();
+        return tickerService.getTickers();
     }
 
 }
