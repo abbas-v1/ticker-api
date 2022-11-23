@@ -29,7 +29,7 @@ public class TickerController {
     private static final Logger LOG = LogManager.getLogger(TickerController.class);
 
     @PostMapping("/ticker")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "${cross.origin}")
     public void postTickerData(@RequestBody List<List<Integer>> tickerList) {
         LOG.debug("Received data from ticker : " + tickerList.size() );
         tickerService.saveTickerData(tickerList);
