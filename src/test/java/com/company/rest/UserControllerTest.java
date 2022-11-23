@@ -49,8 +49,20 @@ public class UserControllerTest {
         Optional<String> param = Optional.empty();
         List<UserV1> result = controller.getUsersV1(param);
         assertNotNull(result);
+        assertEquals(4, result.size());
     }
-    
+
+    /**
+     * Test of getUsersV1 method, of class UserController.
+     */
+    @Test
+    public void testGetUsersV1_ExistingName() {
+        Optional<String> param = Optional.of("Abbas");
+        List<UserV1> result = controller.getUsersV1(param);
+        assertNotNull(result);
+        assertEquals(1, result.size());
+    }
+
     /**
      * Test of getUsersV1 method, of class UserController.
      */
