@@ -14,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author abbas
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class ApplicationTest {
 
     /**
