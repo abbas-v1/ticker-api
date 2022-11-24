@@ -16,7 +16,6 @@ public class UserService {
 
     public List<Users> getUsers(Optional<String> param) {
 
-
         if (param.isPresent()) {
             return usersRepository.findByFirstName(param.get());
         }
