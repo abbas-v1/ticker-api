@@ -5,6 +5,7 @@ package com.company.entity;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
 
 import java.io.Serializable;
 
@@ -13,22 +14,31 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-public class Ticker  implements Serializable {
+public class Ticker implements Persistable<Long> {
 
     @Id
-     private long id;
-     private long channelId;
-     private int bid;
-     private int bidSize;
-     private int ask;
-     private int askSize;
-     private int dailyChange;
-     private int dailyChangePerc;
-     private int lastPrice;
-     private int volume;
-     private int high;
-     private int low;
+    private long id;
+    private long channelId;
+    private int bid;
+    private int bidSize;
+    private int ask;
+    private int askSize;
+    private int dailyChange;
+    private int dailyChangePerc;
+    private int lastPrice;
+    private int volume;
+    private int high;
+    private int low;
 
+    @Override
+    public boolean isNew() {
+        return true;
+    }
+
+    @Override
+    public Long getId() {
+        return this.id;
+    }
 }
 
 
