@@ -1,14 +1,12 @@
 package com.company.service;
 
-import com.company.db.TickerDao;
+import com.company.db.TickerRepository;
 import com.company.entity.Ticker;
-import com.company.rest.TickerController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,19 +14,19 @@ import java.util.List;
 public class TickerService {
 
     @Autowired
-    private TickerDao tickerDao;
+    private TickerRepository tickerRepository;
 
     private static final Logger LOG = LogManager.getLogger(TickerService.class);
 
     public List getTickers() {
-        List<Ticker> tickers = tickerDao.findAll();
+        List<Ticker> tickers = tickerRepository.findAll();
         LOG.info("List of tickers : {}", tickers);
         return tickers;
     }
 
     public void saveTickerData(List<List<Integer>> tickerData) {
         for (List<Integer> list : tickerData) {
-            Ticker saved = tickerDao.save(mapToTicker(list));
+            Ticker saved = tickerRepository.save(mapToTicker(list));
             LOG.info("Ticker saved : {}", saved);
         }
     }

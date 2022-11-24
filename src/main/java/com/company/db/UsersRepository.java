@@ -6,7 +6,7 @@ import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
-public interface UserDao extends Repository<Users, Long> {
+public interface UsersRepository extends Repository<Users, Long> {
 
     @Query("select * from users where first_name = :firstName")
     List<Users> findByFirstName(String firstName);
